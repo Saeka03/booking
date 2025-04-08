@@ -3,20 +3,15 @@ import styles from "./Modal.module.scss";
 import Form from "./Form";
 
 type ModalProps = {
-  handleButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  handleClose: (event: React.MouseEvent<HTMLInputElement>) => void;
+  closeModalHandler: () => void;
 };
 
-function Modal({ handleButtonClick, handleClose }: ModalProps) {
+function Modal({ closeModalHandler }: ModalProps) {
   return (
     <div>
-      <button id="myBtn" onClick={handleButtonClick}>
-        Open Modal
-      </button>
-
       <div id="myModal" className={styles.modal}>
         <div className={styles.modalContent}>
-          <span className={styles.close} onClick={handleClose}>
+          <span className={styles.close} onClick={closeModalHandler}>
             &times;
           </span>
           <Form />
