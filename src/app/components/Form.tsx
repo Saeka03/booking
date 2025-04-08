@@ -3,6 +3,7 @@
 import React, { ChangeEvent, useState } from "react";
 import styles from "./Form.module.scss";
 import { useEvent } from "../contexts/eventContext";
+import Button from "./Button";
 
 function Form() {
   const [name, setName] = useState<string>("");
@@ -29,6 +30,16 @@ function Form() {
 
   return (
     <div className={styles.formContainer}>
+      <h2>Booking Form</h2>
+      <div>
+        <p>
+          Event: <span>{event?.title}</span>
+        </p>
+        <p>
+          Date: <span>{event?.date.toISOString().split("T")[0]}</span>
+        </p>
+      </div>
+      <div className={styles.line}></div>
       <h3>Enter your name and email</h3>
       <form className={styles.formBox} onSubmit={onSubmitHandler}>
         <label htmlFor="name">
@@ -49,7 +60,9 @@ function Form() {
             onChange={onChangeEmailHandler}
           />
         </label>
-        <button type="submit">Submit</button>
+        <div className={styles.buttonWrapper}>
+          <Button type={"submit"} name="Submit" />
+        </div>
       </form>
     </div>
   );
