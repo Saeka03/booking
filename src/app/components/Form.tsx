@@ -1,10 +1,15 @@
 "use client";
 
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./Form.module.scss";
 import { useEvent } from "../contexts/eventContext";
+import Button from "./Button";
 
-function Form() {
+type FormProps = {
+  closeModalHandler: () => void;
+};
+
+function Form({ closeModalHandler }: FormProps) {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const { event } = useEvent();
@@ -17,7 +22,9 @@ function Form() {
     setEmail(e.target.value);
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const data = {
       title: event?.title,
       date: event?.date,
@@ -25,10 +32,23 @@ function Form() {
       email,
     };
     localStorage.setItem("info", JSON.stringify(data));
+
+    closeModalHandler();
+    alert("Successfully booked!");
   };
 
   return (
     <div className={styles.formContainer}>
+      <h2>Booking Form</h2>
+      <div>
+        <p>
+          Event: <span>{event?.title}</span>
+        </p>
+        <p>
+          Date: <span>{event?.date.toISOString().split("T")[0]}</span>
+        </p>
+      </div>
+      <div className={styles.line}></div>
       <h3>Enter your name and email</h3>
       <form className={styles.formBox} onSubmit={onSubmitHandler}>
         <label htmlFor="name">
@@ -49,7 +69,9 @@ function Form() {
             onChange={onChangeEmailHandler}
           />
         </label>
-        <button type="submit">Submit</button>
+        <div className={styles.buttonWrapper}>
+          <Button type={"submit"} name="Submit" />
+        </div>
       </form>
     </div>
   );

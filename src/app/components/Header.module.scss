@@ -2,11 +2,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: rgb(241, 241, 241);
+  width: 100%;
+
+  img {
+    margin: 20px;
+    cursor: pointer;
+  }
 
   .menu {
+    margin: 20px;
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 20px;
     list-style: none;
+    font-size: 24px;
   }
 }

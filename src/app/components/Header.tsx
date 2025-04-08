@@ -5,14 +5,14 @@ import Image from "next/image";
 
 function Header() {
   return (
-    <div>
+    <>
       <header className={styles.header}>
         <Link href="/">
           <Image
             src="/booking_logo.png"
             alt="logo"
-            width={50}
-            height={50}
+            width={75}
+            height={75}
           ></Image>
         </Link>
         <nav>
@@ -23,7 +23,7 @@ function Header() {
           </ul>
         </nav>
       </header>
-    </div>
+    </>
   );
 }
 
