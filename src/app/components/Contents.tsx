@@ -12,8 +12,6 @@ export default function Contents() {
   const { eventHandler } = useEvent();
 
   const openModalHandler = (arg: EventClickArg) => {
-    console.log(arg.event.title);
-    console.log(arg.event.start);
     setIsOpenModal(true);
     if (!arg?.event.title || !arg?.event.start) return;
     eventHandler(arg.event.title, arg.event.start);

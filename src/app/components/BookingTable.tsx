@@ -4,40 +4,28 @@ import interactionPlugin from "@fullcalendar/interaction";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { EventClickArg } from "@fullcalendar/core";
+import { useEffect, useState } from "react";
+import { fetchEvents } from "../api/eventsAPI";
 
 type BookingTableProps = {
   openModalHandler: (arg: EventClickArg) => void;
 };
 
 export default function BookingTable({ openModalHandler }: BookingTableProps) {
-  const aprilFools = new Date("2025-04-01");
-  const aprilFoolsOffset = aprilFools.getTimezoneOffset();
-  const aprilFoolsLocal = new Date(
-    aprilFools.getTime() + aprilFoolsOffset * 60000
-  );
+  const [events, setEvents] = useState<Event[]>([]);
 
-  const techEvent = new Date("2025-04-21");
-  const techEventOffset = techEvent.getTimezoneOffset();
-  const techEventLocal = new Date(
-    techEvent.getTime() + techEventOffset * 60000
-  );
+  useEffect(() => {
+    const getEvents = async () => {
+      try {
+        const data = await fetchEvents();
+        setEvents(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-  const event1 = {
-    id: "0",
-    title: "April Fools",
-    start: aprilFoolsLocal,
-    end: aprilFoolsLocal,
-    backgroundColor: "darkgreen",
-    display: "block",
-  };
-  const event2 = {
-    id: "1",
-    title: "Tech Event",
-    start: techEventLocal,
-    end: techEventLocal,
-    backgroundColor: "darkgreen",
-    display: "block",
-  };
+    getEvents();
+  }, []);
 
   return (
     <FullCalendar
@@ -57,7 +45,7 @@ export default function BookingTable({ openModalHandler }: BookingTableProps) {
         center: "title",
         right: "prev,next today",
       }}
-      events={[event1, event2]}
+      events={events}
     />
   );
 }
