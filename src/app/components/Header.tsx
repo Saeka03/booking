@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function Header() {
   return (
-    <div>
+    <>
       <header className={styles.header}>
         <Link href="/">
           <Image
@@ -23,7 +23,7 @@ function Header() {
           </ul>
         </nav>
       </header>
-    </div>
+    </>
   );
 }
 

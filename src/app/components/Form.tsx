@@ -1,11 +1,15 @@
 "use client";
 
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./Form.module.scss";
 import { useEvent } from "../contexts/eventContext";
 import Button from "./Button";
 
-function Form() {
+type FormProps = {
+  closeModalHandler: () => void;
+};
+
+function Form({ closeModalHandler }: FormProps) {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const { event } = useEvent();
@@ -18,7 +22,9 @@ function Form() {
     setEmail(e.target.value);
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const data = {
       title: event?.title,
       date: event?.date,
@@ -26,6 +32,9 @@ function Form() {
       email,
     };
     localStorage.setItem("info", JSON.stringify(data));
+
+    closeModalHandler();
+    alert("Successfully booked!");
   };
 
   return (

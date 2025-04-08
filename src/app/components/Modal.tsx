@@ -14,7 +14,7 @@ function Modal({ closeModalHandler }: ModalProps) {
           <span className={styles.close} onClick={closeModalHandler}>
             &times;
           </span>
-          <Form />
+          <Form closeModalHandler={closeModalHandler} />
         </div>
       </div>
     </div>
