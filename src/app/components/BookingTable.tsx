@@ -1,17 +1,42 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
+import interactionPlugin from "@fullcalendar/interaction";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { EventClickArg } from "@fullcalendar/core";
 
-export default function BookingTable() {
-  const handleDateClick = (arg: DateClickArg) => {
-    alert(arg.dateStr);
-  };
+type BookingTableProps = {
+  openModalHandler: (arg: EventClickArg) => void;
+};
 
-  const handleEventClick = (arg: EventClickArg) => {
-    alert(arg.event.title);
+export default function BookingTable({ openModalHandler }: BookingTableProps) {
+  const aprilFools = new Date("2025-04-01");
+  const aprilFoolsOffset = aprilFools.getTimezoneOffset();
+  const aprilFoolsLocal = new Date(
+    aprilFools.getTime() + aprilFoolsOffset * 60000
+  );
+
+  const techEvent = new Date("2025-04-21");
+  const techEventOffset = techEvent.getTimezoneOffset();
+  const techEventLocal = new Date(
+    techEvent.getTime() + techEventOffset * 60000
+  );
+
+  const event1 = {
+    id: "0",
+    title: "April Fools",
+    start: aprilFoolsLocal,
+    end: aprilFoolsLocal,
+    backgroundColor: "darkgreen",
+    display: "block",
+  };
+  const event2 = {
+    id: "1",
+    title: "Tech Event",
+    start: techEventLocal,
+    end: techEventLocal,
+    backgroundColor: "darkgreen",
+    display: "block",
   };
 
   return (
@@ -23,33 +48,16 @@ export default function BookingTable() {
         interactionPlugin,
         timeGridPlugin,
       ]}
-      eventClick={handleEventClick}
-      dateClick={handleDateClick}
+      eventClick={openModalHandler}
       displayEventTime={false}
       initialView="dayGridMonth"
       weekends={false}
       headerToolbar={{
-        left: "prev,next today",
+        left: "",
         center: "title",
-        right: "resourceTimelineWeek,dayGridMonth,timeGridWeek",
+        right: "prev,next today",
       }}
-      events={[
-        {
-          id: "1",
-          title: "April Fools",
-          start: new Date("2025-04-01"),
-          end: new Date("2025-04-01"),
-          backgroundColor: "darkgreen",
-          display: "block",
-        },
-        {
-          title: "Tech Event",
-          start: new Date("2025-04-21"),
-          end: new Date("2025-04-21"),
-          backgroundColor: "darkgreen",
-          display: "block",
-        },
-      ]}
+      events={[event1, event2]}
     />
   );
 }
