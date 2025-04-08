@@ -11,8 +11,8 @@ function Header() {
           <Image
             src="/booking_logo.png"
             alt="logo"
-            width={50}
-            height={50}
+            width={75}
+            height={75}
           ></Image>
         </Link>
         <nav>
