@@ -2,8 +2,8 @@
 
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./Form.module.scss";
-import { useEvent } from "../contexts/eventContext";
 import Button from "./Button";
+import { useEventStore } from "../stores/eventStore";
 
 type FormProps = {
   closeModalHandler: () => void;
@@ -12,7 +12,7 @@ type FormProps = {
 function Form({ closeModalHandler }: FormProps) {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const { event } = useEvent();
+  const event = useEventStore((state) => state.events);
 
   const onChangeNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -45,7 +45,7 @@ function Form({ closeModalHandler }: FormProps) {
           Event: <span>{event?.title}</span>
         </p>
         <p>
-          Date: <span>{event?.date.toISOString().split("T")[0]}</span>
+          Date: <span>{event?.date?.toISOString().split("T")[0]}</span>
         </p>
       </div>
       <div className={styles.line}></div>

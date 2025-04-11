@@ -1,21 +1,21 @@
 "use client";
 
 import { EventClickArg } from "@fullcalendar/core";
-import { useEvent } from "../contexts/eventContext";
 import Header from "./Header";
 import BookingTable from "./BookingTable";
 import Modal from "./Modal";
 import { useState } from "react";
 import styles from "./Contents.module.scss";
+import { useEventStore } from "../stores/eventStore";
 
 export default function Contents() {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const { eventHandler } = useEvent();
+  const setEvent = useEventStore((state) => state.setEvent);
 
   const openModalHandler = (arg: EventClickArg) => {
     setIsOpenModal(true);
     if (!arg?.event.title || !arg?.event.start) return;
-    eventHandler(arg.event.title, arg.event.start);
+    setEvent(arg.event.title, arg.event.start);
   };
 
   const closeModalHandler = () => {
