@@ -1,10 +1,12 @@
 import { create } from "zustand";
 
+export type Event = {
+  title?: string;
+  date?: Date;
+};
+
 type EventStoreState = {
-  events: {
-    title?: string;
-    date?: Date;
-  };
+  events: Event;
   setEvent: (title: string, date: Date) => void;
 };
 

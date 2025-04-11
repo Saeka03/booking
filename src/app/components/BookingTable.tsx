@@ -5,8 +5,9 @@ import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { EventClickArg } from "@fullcalendar/core";
 import { useEffect, useState } from "react";
-import { fetchEvents } from "../api/eventsAPI";
+// import { fetchEvents } from "../api/eventsAPI";
 import styles from "./BookingTable.module.scss";
+import { Event } from "../stores/eventStore";
 
 type BookingTableProps = {
   openModalHandler: (arg: EventClickArg) => void;
@@ -18,7 +19,14 @@ export default function BookingTable({ openModalHandler }: BookingTableProps) {
   useEffect(() => {
     const getEvents = async () => {
       try {
-        const data = await fetchEvents();
+        const res = await fetch("/api/events");
+        const data = await res.json();
+
+        console.log(data);
+
+        if (!data) {
+          return;
+        }
         setEvents(data);
       } catch (err) {
         console.error(err);
