@@ -2,6 +2,7 @@
   "name": "booking-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -20,6 +21,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sass": "^1.86.3",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
