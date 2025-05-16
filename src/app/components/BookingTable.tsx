@@ -5,9 +5,9 @@ import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { EventClickArg } from "@fullcalendar/core";
 import { useEffect, useState } from "react";
-// import { fetchEvents } from "../api/eventsAPI";
 import styles from "./BookingTable.module.scss";
 import { Event } from "../stores/eventStore";
+import Link from "next/link";
 
 type BookingTableProps = {
   openModalHandler: (arg: EventClickArg) => void;
@@ -59,6 +59,9 @@ export default function BookingTable({ openModalHandler }: BookingTableProps) {
         events={events}
         eventColor="#03440c"
       />
+      <Link href="/addEvent">
+        <button>Add Event</button>
+      </Link>
     </div>
   );
 }
