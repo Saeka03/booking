@@ -2,8 +2,15 @@ import React from "react";
 import styles from "./Header.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { createClient } from "@/utils/supabase/client";
 
-function Header() {
+function Header({ isUser }: { isUser: boolean }) {
+  const logoutHandler = async () => {
+    const supabase = await createClient();
+    await supabase.auth.signOut();
+    location.reload();
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -15,13 +22,13 @@ function Header() {
             height={75}
           ></Image>
         </Link>
-        <nav>
-          <ul className={styles.menu}>
-            <li className={styles.menuItem}>Home</li>
-            <li className={styles.menuItem}>About Us</li>
-            <li className={styles.menuItem}>Contact Us</li>
-          </ul>
-        </nav>
+        {isUser ? (
+          <button onClick={logoutHandler}>Logout</button>
+        ) : (
+          <Link href="/login">
+            <button>Login</button>
+          </Link>
+        )}
       </header>
     </>
   );

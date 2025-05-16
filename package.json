@@ -16,6 +16,8 @@
     "@fullcalendar/react": "^6.1.17",
     "@fullcalendar/resource-timeline": "^6.1.17",
     "@fullcalendar/timegrid": "^6.1.17",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.4",
     "fullcalendar": "^6.1.17",
     "next": "15.2.4",
     "react": "^19.0.0",

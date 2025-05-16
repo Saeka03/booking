@@ -11,9 +11,13 @@ import Link from "next/link";
 
 type BookingTableProps = {
   openModalHandler: (arg: EventClickArg) => void;
+  isUser: boolean;
 };
 
-export default function BookingTable({ openModalHandler }: BookingTableProps) {
+export default function BookingTable({
+  openModalHandler,
+  isUser,
+}: BookingTableProps) {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
@@ -59,9 +63,13 @@ export default function BookingTable({ openModalHandler }: BookingTableProps) {
         events={events}
         eventColor="#03440c"
       />
-      <Link href="/addEvent">
-        <button>Add Event</button>
-      </Link>
+      {isUser ? (
+        <Link href="/addEvent">
+          <button>Add Event</button>
+        </Link>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { useState } from "react";
 import styles from "./Contents.module.scss";
 import { useEventStore } from "../stores/eventStore";
 
-export default function Contents() {
+export default function Contents({ isUser }: { isUser: boolean }) {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const setEvent = useEventStore((state) => state.setEvent);
 
@@ -25,8 +25,8 @@ export default function Contents() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Header />
-        <BookingTable openModalHandler={openModalHandler} />
+        <Header isUser={isUser} />
+        <BookingTable openModalHandler={openModalHandler} isUser={isUser} />
       </main>
       <footer>
         <p>© Copyright 2025 by Booking Service. All right reserved</p>
